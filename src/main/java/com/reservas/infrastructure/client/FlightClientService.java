@@ -10,7 +10,7 @@ public class FlightClientService implements FlightClient {
 
 	@Autowired
 	RestTemplate template;
-	String resourceUrl = "http://localhost:9000/flight/";
+	String resourceUrl = "http://microservicio-vuelos/flight/";
 	
 	@Override
 	public void updateFlight(Long flightId) {		
