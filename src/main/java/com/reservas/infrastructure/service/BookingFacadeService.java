@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import com.reservas.application.usercase.BookingUserCase;
 import com.reservas.domain.model.Booking;
 import com.reservas.infrastructure.client.FlightClient;
+import com.reservas.infrastructure.client.payload.FlightResponse;
 import com.reservas.infrastructure.mapper.BookingDtoMapper;
+import com.reservas.infrastructure.payload.BookingDto;
 import com.reservas.infrastructure.payload.BookingListResponse;
 import com.reservas.infrastructure.payload.BookingRequest;
 import com.reservas.infrastructure.payload.MessageResponse;
@@ -30,9 +32,7 @@ public class BookingFacadeService implements BookingFacade {
 		MessageResponse messageResponse = new MessageResponse();
 		messageResponse.setCode("10");
 		messageResponse.setMessage("Exito");
-		bookingResponse.setBookingList(bookingService.getBookingList()
-				.stream()
-				.map(BookingDtoMapper::toBookingDto)
+		bookingResponse.setBookingList(bookingService.getBookingList().stream().map(BookingDtoMapper::toBookingDto)
 				.collect(Collectors.toList()));
 		bookingResponse.setMessage(messageResponse);
 		return bookingResponse;
@@ -45,13 +45,22 @@ public class BookingFacadeService implements BookingFacade {
 		messageResponse.setCode("10");
 		messageResponse.setMessage("Exito");
 		Booking booking = bookingService.addBooking(BookingDtoMapper.toBooking(bookingReq));
-		if(booking== null) {
+		if (booking == null) {
 			messageResponse.setCode("20");
 			messageResponse.setMessage("Error");
 		}
-		bookingResponse.setBooking(BookingDtoMapper.toBookingDto(booking));
+
+		BookingDto bookingDto = BookingDtoMapper.toBookingDto(booking);
+		FlightResponse flight = this.flightService.updateFlight(booking.getFlightId());
+		if (flight.getMessage().getCode().equals("10")) {
+			bookingDto.setCompany(flight.getFlight().getCompany());
+			bookingDto.setEmail("ljimeneztorres@gmail.com");
+		}
+
+		bookingResponse.setBooking(bookingDto);
 		bookingResponse.setMessage(messageResponse);
-		this.flightService.updateFlight(booking.getFlightId());
+
+		// todo: kafka
 		return bookingResponse;
 	}
 }

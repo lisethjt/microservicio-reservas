@@ -1,24 +1,21 @@
-package com.reservas.infrastructure.payload;
+package com.reservas.infrastructure.streams.event;
 
 import java.time.Instant;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class BookingDto {
+@Builder
+public class BookingEvent {
 
-	private Long id;
-	private String dni;
 	private String name;
 	private String hotel;
 	private Long flightId;
-	private String company;	
+	private String company;
+	private String bookingId;
 	private Instant date;
 	private String email;
 }
