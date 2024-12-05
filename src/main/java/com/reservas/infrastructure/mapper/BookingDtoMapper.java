@@ -11,10 +11,11 @@ public final class BookingDtoMapper {
 	public static BookingDto toBookingDto(Booking booking) {
 		return BookingDto.builder()				
 				.name(booking.getName())
-				.dni(booking.getDni())				
-				.flightId(booking.getFlightId())
+				.dni(booking.getDni())	
 				.date(booking.getDate())
 				.id(booking.getId())
+				.hotelId(booking.getHotelId())
+				.flightId(booking.getFlightId())
 				.build();
 	}	
 	

@@ -15,10 +15,8 @@ public class BookingDto {
 
 	private Long id;
 	private String dni;
-	private String name;
-	private String hotel;
+	private String name;	
+	private Instant date;	
+	private Long hotelId;
 	private Long flightId;
-	private String company;	
-	private Instant date;
-	private String email;
 }
