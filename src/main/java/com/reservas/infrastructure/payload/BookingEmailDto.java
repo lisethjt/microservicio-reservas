@@ -1,4 +1,4 @@
-package com.reservas.infrastructure.streams.event;
+package com.reservas.infrastructure.payload;
 
 import java.time.Instant;
 
@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class BookingEvent {
+public class BookingEmailDto {
 
 	private String name;
 	private String hotel;

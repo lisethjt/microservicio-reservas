@@ -5,4 +5,6 @@ import com.reservas.infrastructure.client.payload.FlightResponse;
 public interface FlightClient {
 
 	public FlightResponse updateFlight(Long flightId);
+	
+	public FlightResponse getFlight(Long flightId);
 }

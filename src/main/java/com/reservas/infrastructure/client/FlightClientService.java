@@ -21,4 +21,11 @@ public class FlightClientService implements FlightClient {
 				null, FlightResponse.class);		
 		return response.getBody();
 	}
+
+	@Override
+	public FlightResponse getFlight(Long flightId) {
+		ResponseEntity<FlightResponse> response = template.exchange(resourceUrl + flightId, HttpMethod.GET,
+				null, FlightResponse.class);		
+		return response.getBody();
+	}
 }
